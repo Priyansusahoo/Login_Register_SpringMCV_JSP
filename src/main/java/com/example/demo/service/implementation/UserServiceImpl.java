@@ -63,13 +63,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("OTP expired");
         }
 
-        if (passwordEncoder.matches(request.getOtp(), user.getHashedVerificationOtp())) {
-            user.setEmailVerified(true);
-            userRepository.save(user);
-            return true;
+        if (!passwordEncoder.matches(request.getOtp(), user.getHashedVerificationOtp())) {
+            throw new RuntimeException("Invalid OTP");
         }
-
-        return false;
+        user.setEmailVerified(true);
+        userRepository.save(user);
+        return true;
     }
 
     /**

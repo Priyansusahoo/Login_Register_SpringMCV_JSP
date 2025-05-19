@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("/register")
     public String register(@Valid RegistrationRequest request) {
         userService.registerUser(request);
-        return "redirect:/verify-otp?email=" + request.getEmail();
+        return "redirect:/verify-otp?email=" + request.getEmail() + "&otpSent=true";
     }
 
     @GetMapping("/verify-otp")
@@ -45,10 +45,15 @@ public class AuthController {
 
     @PostMapping("/verify-otp")
     public String verifyOtp(@Valid OtpVerificationRequest request) {
-        if (userService.verifyOtp(request)) {
-            return "redirect:/login";
+        try {
+            if (userService.verifyOtp(request)) {
+                return "redirect:/login?otpVerified=true";
+            }
+            return "redirect:/verify-otp?email=" + request.getEmail() + "&error=Invalid+OTP";
+        } catch (RuntimeException ex) {
+            return "redirect:/verify-otp?email=" + request.getEmail() +
+                    "&error=" + ex.getMessage();
         }
-        return "redirect:/verify-otp?error";
     }
 
     @GetMapping("/login")
