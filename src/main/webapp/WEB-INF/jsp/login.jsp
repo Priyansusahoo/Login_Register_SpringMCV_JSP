@@ -25,6 +25,18 @@
                         </div>
                     </c:if>
 
+                    <c:if test="${param.resetSuccess != null}">
+                        <div class="alert alert-success">
+                            Password reset successful! You can now log in.
+                        </div>
+                    </c:if>
+
+                    <c:if test="${param.resetInitiated != null}">
+                        <div class="alert alert-success">
+                            Password reset link sent to your email address!
+                        </div>
+                    </c:if>
+
                     <form action="/login" method="POST">
                         <div class="mb-3">
                             <label class="form-label">Email</label>

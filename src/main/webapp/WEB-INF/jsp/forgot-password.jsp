@@ -22,8 +22,32 @@
                     <form action="/forgot-password" method="POST">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" id="forgotEmail" required autocomplete="off">
+                            <div class="invalid-feedback" id="forgotEmailError" style="display:none;">
+                                Please enter a valid email address.
+                            </div>
                         </div>
+                        <script>
+                            document.getElementById('forgotEmail').addEventListener('input', function() {
+                                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                const error = document.getElementById('forgotEmailError');
+                                if (!emailPattern.test(this.value)) {
+                                    error.style.display = 'block';
+                                    this.classList.add('is-invalid');
+                                } else {
+                                    error.style.display = 'none';
+                                    this.classList.remove('is-invalid');
+                                }
+                            });
+
+                            document.querySelector('form[action="/forgot-password"]').addEventListener('submit', function(e) {
+                                const email = document.getElementById('forgotEmail');
+                                if (email.classList.contains('is-invalid') || !email.value) {
+                                    e.preventDefault();
+                                    email.dispatchEvent(new Event('input'));
+                                }
+                            });
+                        </script>
                         <button type="submit" class="btn btn-primary w-100">Send Reset Link</button>
                     </form>
 
