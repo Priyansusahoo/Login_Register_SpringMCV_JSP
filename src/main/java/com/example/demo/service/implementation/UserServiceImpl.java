@@ -147,6 +147,11 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        // Clear any previous reset tokens
+        user.setResetTokenId(null);
+        user.setHashedResetToken(null);
+        user.setResetTokenExpiry(null);
+
         String rawToken = generateSecureToken();
         UUID tokenId = UUID.randomUUID();
 
@@ -186,7 +191,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Passwords do not match");
         }
 
-        User user = userRepository.findByResetTokenId(UUID.fromString(request.getToken()))
+        User user = userRepository.findByResetTokenId(UUID.fromString(request.getTokenId()))
                 .orElseThrow(() -> new RuntimeException("Invalid reset token"));
 
         if (LocalDateTime.now().isAfter(user.getResetTokenExpiry())) {

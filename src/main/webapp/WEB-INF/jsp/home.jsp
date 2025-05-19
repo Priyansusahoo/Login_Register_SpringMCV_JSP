@@ -26,7 +26,7 @@
                     <p class="card-text text-muted">
                         <small>Published: March 15, 2024</small>
                     </p>
-                    <a href="#" class="btn btn-primary">Read More</a>
+                    <a href="https://codesecrets.hashnode.dev/securing-spring-boot-applications-best-practices-and-techniques" class="btn btn-primary" target="_blank">Read More</a>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <p class="card-text text-muted">
                         <small>Published: February 28, 2024</small>
                     </p>
-                    <a href="#" class="btn btn-primary">Read More</a>
+                    <a href="https://lsena.hashnode.dev/tuning-your-postgresql-for-high-performance" class="btn btn-primary" target="_blank">Read More</a>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     <p class="card-text text-muted">
                         <small>Published: April 10, 2024</small>
                     </p>
-                    <a href="#" class="btn btn-primary">Read More</a>
+                    <a href="https://yash211.hashnode.dev/spring-web-mvc" class="btn btn-primary" target="_blank">Read More</a>
                 </div>
             </div>
         </div>
