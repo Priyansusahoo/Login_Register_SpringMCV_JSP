@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
@@ -37,13 +38,23 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
             try {
                 userService.incrementFailedAttempts(email);
             } catch (RuntimeException ex) {
-
+                // ignore
             }
         }
         String redirectUrl = "/login?error";
-        if (exception.getMessage() != null && exception.getMessage().contains("User not found")) {
+        if (isUsernameNotFound(exception)) {
             redirectUrl += "&noAccount=true";
         }
         response.sendRedirect(redirectUrl);
+    }
+
+    private boolean isUsernameNotFound(Throwable ex) {
+        while (ex != null) {
+            if (ex instanceof UsernameNotFoundException) {
+                return true;
+            }
+            ex = ex.getCause();
+        }
+        return false;
     }
 }
