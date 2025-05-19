@@ -13,7 +13,13 @@
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Login</h2>
 
-                    <c:if test="${param.error != null}">
+                    <c:if test="${param.noAccount != null}">
+                        <div class="alert alert-warning">
+                            No account associated with this email. <a href="/register">Register here</a>.
+                        </div>
+                    </c:if>
+
+                    <c:if test="${param.error != null && param.noAccount == null}">
                         <div class="alert alert-danger">
                             Invalid credentials or account locked!
                         </div>
@@ -34,12 +40,6 @@
                     <c:if test="${param.resetInitiated != null}">
                         <div class="alert alert-success">
                             Password reset link sent to your email address!
-                        </div>
-                    </c:if>
-
-                    <c:if test="${param.noAccount != null}">
-                        <div class="alert alert-warning">
-                            No account associated with this email. <a href="/register">Register here</a>.
                         </div>
                     </c:if>
 
