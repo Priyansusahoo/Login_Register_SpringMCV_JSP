@@ -37,11 +37,47 @@
                         </div>
                     </c:if>
 
+                    <c:if test="${param.noAccount != null}">
+                        <div class="alert alert-warning">
+                            No account associated with this email. <a href="/register">Register here</a>.
+                        </div>
+                    </c:if>
+
                     <form action="/login" method="POST">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input type="email" name="username" class="form-control" required>
                         </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const emailInput = document.querySelector('input[name="username"]');
+                                const form = emailInput.closest('form');
+                                // Create error message element
+                                let error = document.createElement('div');
+                                error.className = 'invalid-feedback';
+                                error.style.display = 'none';
+                                error.textContent = 'Please enter a valid email address.';
+                                emailInput.parentNode.appendChild(error);
+
+                                emailInput.addEventListener('input', function() {
+                                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                    if (!emailPattern.test(this.value)) {
+                                        error.style.display = 'block';
+                                        this.classList.add('is-invalid');
+                                    } else {
+                                        error.style.display = 'none';
+                                        this.classList.remove('is-invalid');
+                                    }
+                                });
+
+                                form.addEventListener('submit', function(e) {
+                                    if (emailInput.classList.contains('is-invalid') || !emailInput.value) {
+                                        e.preventDefault();
+                                        emailInput.dispatchEvent(new Event('input'));
+                                    }
+                                });
+                            });
+                        </script>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="loginPassword" required>
