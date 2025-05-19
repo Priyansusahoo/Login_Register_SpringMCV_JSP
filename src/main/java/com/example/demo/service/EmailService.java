@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class EmailService {
      * @param email the recipient's email address
      * @param otp   the OTP to be sent
      */
+    @Async
     public void sendOtpEmail(String email, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
@@ -32,6 +34,7 @@ public class EmailService {
      * @param email      the recipient's email address
      * @param resetLink  the link to reset the password
      */
+    @Async
     public void sendPasswordResetEmail(String email, String resetLink) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
