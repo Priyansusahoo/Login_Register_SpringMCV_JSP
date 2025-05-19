@@ -48,8 +48,12 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     private void checkAccountLockStatus(User user) {
         if (user.getLockTime() != null &&
-                user.getLockTime().isAfter(LocalDateTime.now().minusHours(24))) {
+                user.getLockTime().isAfter(LocalDateTime.now().minusHours(24)))
+        {
             user.setAccountNonLocked(false);
+        } else {
+            user.setAccountNonLocked(true);
         }
+        userRepository.save(user);
     }
 }
