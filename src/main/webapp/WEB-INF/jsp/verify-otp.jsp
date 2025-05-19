@@ -19,9 +19,15 @@
                         </div>
                     </c:if>
 
-                    <c:if test="${param.resent != null}">
+                    <c:if test="${param.resend != null}">
                         <div class="alert alert-success">
-                            New OTP sent successfully!
+                            OTP sent to your email address!
+                        </div>
+                    </c:if>
+
+                    <c:if test="${param.otpSent != null}">
+                        <div class="alert alert-success">
+                            OTP sent to your email address!
                         </div>
                     </c:if>
 
