@@ -21,13 +21,12 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     private final UserService userService;
 
     /**
-     * Handles authentication failure by incrementing the failed attempts for the user.
+     * Handles authentication failure by incrementing the failed attempts for the user
+     * and redirecting to the login page with an error message.
      *
-     * @param request  the HttpServletRequest
-     * @param response the HttpServletResponse
+     * @param request   the HttpServletRequest
+     * @param response  the HttpServletResponse
      * @param exception the AuthenticationException
-     * @throws IOException      if an I/O error occurs
-     * @throws ServletException if a servlet error occurs
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
@@ -35,8 +34,16 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
                                         AuthenticationException exception) throws IOException, ServletException {
         String email = request.getParameter("username");
         if (email != null && !email.isBlank()) {
-            userService.incrementFailedAttempts(email);
+            try {
+                userService.incrementFailedAttempts(email);
+            } catch (RuntimeException ex) {
+
+            }
         }
-        response.sendRedirect("/login?error");
+        String redirectUrl = "/login?error";
+        if (exception.getMessage() != null && exception.getMessage().contains("User not found")) {
+            redirectUrl += "&noAccount=true";
+        }
+        response.sendRedirect(redirectUrl);
     }
 }
