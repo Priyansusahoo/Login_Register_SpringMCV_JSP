@@ -34,7 +34,9 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
         String email = request.getParameter("username");
-        userService.incrementFailedAttempts(email);
+        if (email != null && !email.isBlank()) {
+            userService.incrementFailedAttempts(email);
+        }
         response.sendRedirect("/login?error");
     }
 }
