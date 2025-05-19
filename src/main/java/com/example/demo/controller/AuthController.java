@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.entity.User;
+import com.example.demo.repository.UserRepository;
 import jakarta.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
@@ -21,16 +24,23 @@ import com.example.demo.service.UserService;
 public class AuthController {
     private final AuthService authService;
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @GetMapping("/register")
     public String showRegistrationForm() {
-        return "register"; // Returns register.jsp
+        return "register";
     }
 
     @PostMapping("/register")
     public String register(@Valid RegistrationRequest request) {
         userService.registerUser(request);
         return "redirect:/verify-otp?email=" + request.getEmail();
+    }
+
+    @GetMapping("/verify-otp")
+    public String showVerifyOtpForm(@RequestParam String email, Model model) {
+        model.addAttribute("email", email);
+        return "verify-otp";
     }
 
     @PostMapping("/verify-otp")
@@ -45,8 +55,6 @@ public class AuthController {
     public String showLoginForm() {
         return "login"; // Returns login.jsp
     }
-
-
 
     @PostMapping("/resend-otp")
     public String resendOtp(@Valid ResendOtpRequest request) {
@@ -89,5 +97,14 @@ public class AuthController {
             return "redirect:/reset-password?tokenId=" + request.getToken() +
                     "&token=" + request.getToken() + "&error=" + e.getMessage();
         }
+    }
+
+    @GetMapping("/home")
+    public String showHomePage(Model model, Principal principal) {
+        // Fetch user by email (principal.getName())
+        User user = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        model.addAttribute("firstName", user.getFirstName());
+        return "home";
     }
 }

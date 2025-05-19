@@ -37,8 +37,10 @@ public class SecurityConfig {
                                 "/register", "/login",
                                 "/verify-otp", "/resend-otp",
                                 "/forgot-password", "/reset-password*",
-                                "/css/**", "/js/**", "/images/**")
-                        .permitAll()
+                                "/css/**", "/js/**", "/images/**"
+                        ).permitAll()
+                        // Ignore JSP resources
+                        .requestMatchers("/WEB-INF/jsp/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
