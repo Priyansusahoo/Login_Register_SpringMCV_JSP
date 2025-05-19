@@ -19,6 +19,12 @@
                         </div>
                     </c:if>
 
+                    <c:if test="${param.otpVerified != null}">
+                        <div class="alert alert-success">
+                            OTP verified successfully! You can now log in.
+                        </div>
+                    </c:if>
+
                     <form action="/login" method="POST">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
@@ -26,8 +32,20 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" required>
+                            <input type="password" name="password" class="form-control" id="loginPassword" required>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="showLoginPassword">
+                                <label class="form-check-label" for="showLoginPassword">
+                                    Show Password
+                                </label>
+                            </div>
                         </div>
+                        <script>
+                            document.getElementById('showLoginPassword').addEventListener('change', function() {
+                                const pwd = document.getElementById('loginPassword');
+                                pwd.type = this.checked ? 'text' : 'password';
+                            });
+                        </script>
                         <button type="submit" class="btn btn-primary w-100">Login</button>
                     </form>
 
