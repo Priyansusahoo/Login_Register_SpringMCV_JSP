@@ -94,7 +94,7 @@ public class AuthController {
             userService.resetPassword(request);
             return "redirect:/login?resetSuccess=true";
         } catch (RuntimeException e) {
-            return "redirect:/reset-password?tokenId=" + request.getToken() +
+            return "redirect:/reset-password?tokenId=" + request.getTokenId() +
                     "&token=" + request.getToken() + "&error=" + e.getMessage();
         }
     }
