@@ -18,6 +18,72 @@
     <!-- Technical Blogs Section -->
     <h3 class="mb-4">Technical Blogs</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <div class="col">
+            <div class="card h-100">
+                <img src="/images/dockerinternal.jpg" class="card-img-top" alt="Docker Internals">
+                <div class="card-body">
+                    <h5 class="card-title">Docker Internals: Isolation, Resource Control, and Kernel Mechanics</h5>
+                    <p class="card-text text-muted">
+                        <small>Published: January 28, 2025</small>
+                    </p>
+                    <a href="https://priyansu1.hashnode.dev/docker-internals-isolation-resource-control-and-kernel-mechanics" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <img src="/images/fedoralinuxsetup.jpg" class="card-img-top" alt="Fedora Linux Setup">
+                <div class="card-body">
+                    <h5 class="card-title">Fedora Linux SetUp</h5>
+                    <p class="card-text text-muted">
+                        <small>Published: March 16, 2023</small>
+                    </p>
+                    <a href="https://priyansu1.hashnode.dev/fedora-linux-setup" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <img src="/images/ollamawebui.jpg" class="card-img-top" alt="Streamlined Ollama WebUI Setup">
+                <div class="card-body">
+                    <h5 class="card-title">Streamlined Ollama WebUI Setup: Automated Scripts, LLM Integration, and Desktop Shortcut Creation</h5>
+                    <p class="card-text text-muted">
+                        <small>Published: January 26, 2025</small>
+                    </p>
+                    <a href="https://priyansu1.hashnode.dev/streamlined-ollama-webui-setup-automated-scripts-llm-integration-and-desktop-shortcut-creation" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <img src="/images/javareflection.jpg" class="card-img-top" alt="Java Reflection">
+                <div class="card-body">
+                    <h5 class="card-title">Discovering Java Reflection: A Practical Guide</h5>
+                    <p class="card-text text-muted">
+                        <small>Published: January 24, 2025</small>
+                    </p>
+                    <a href="https://priyansu1.hashnode.dev/discovering-java-reflection-a-practical-guide" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <img src="/images/awslambda.jpg" class="card-img-top" alt="AWS Lambda">
+                <div class="card-body">
+                    <h5 class="card-title">AWS Lambda: Getting started with Serverless Computing</h5>
+                    <p class="card-text text-muted">
+                        <small>Published: March 29, 2023</small>
+                    </p>
+                    <a href="https://priyansu1.hashnode.dev/aws-lambda-getting-started-with-serverless-computing" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+
         <div class="col">
             <div class="card h-100">
                 <img src="/images/spring-security.jpg" class="card-img-top" alt="Spring Security">
