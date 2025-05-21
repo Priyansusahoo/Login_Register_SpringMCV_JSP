@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
 import lombok.RequiredArgsConstructor;
-
-import com.example.demo.security.CustomAuthenticationFailureHandler;
-import com.example.demo.security.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
